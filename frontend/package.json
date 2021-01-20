@@ -1,0 +1,43 @@
+{
+  "name": "recrutra-dev",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn format"
+    }
+  },
+  "dependencies": {
+    "@types/react-icons": "^3.0.0",
+    "@types/uuid": "^8.3.0",
+    "@uiw/react-md-editor": "^2.1.1",
+    "axios": "^0.21.0",
+    "milligram": "^1.4.1",
+    "next": "^10.0.3",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-icons": "^4.1.0",
+    "react-is": "^16.8.0",
+    "styled-components": "^5.0.0",
+    "suneditor-react": "^2.15.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^14.14.14",
+    "@types/react": "^17.0.0",
+    "@types/styled-components": "^5.1.7",
+    "babel-plugin-styled-components": "^1.8.0",
+    "eslint": "^7.10.0",
+    "husky": "^4.3.0",
+    "prettier": "^2.1.2",
+    "typescript": "^4.1.3"
+  },
+  "license": "MIT"
+}

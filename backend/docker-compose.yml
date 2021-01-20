@@ -1,0 +1,14 @@
+version: "2"
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=recrurajr
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
