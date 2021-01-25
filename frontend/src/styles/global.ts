@@ -26,6 +26,7 @@ const GlobalStyles = createGlobalStyle`
     }
     .main-content {
       margin: 20px 0;
+      
     }
 `;
 
