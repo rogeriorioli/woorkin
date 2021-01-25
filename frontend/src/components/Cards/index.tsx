@@ -12,7 +12,6 @@ interface CardsProps {
   linkedin?: string;
   phone?: string;
   website?: string;
-
   children?: ReactNode;
 }
 

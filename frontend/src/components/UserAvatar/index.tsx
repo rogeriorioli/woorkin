@@ -74,7 +74,7 @@ const UserAvatar = ({ background }: BgAvatar) => {
   };
   return (
     <AvatarContainer
-      background={!image ? '../static/images/avatar-icon.webp' : image}
+      background={!image ? '../../static/images/avatar-icon.webp' : image}
     >
       <label className="btn-picture">
         <input type="file" name="avatar_url" onChange={UploadAvatar} />

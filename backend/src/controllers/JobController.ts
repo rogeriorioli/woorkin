@@ -8,6 +8,9 @@ import db from '../database/connection'
 interface JobData {
   title: string
   job_description: string,
+  number_offers: number
+  locale: string
+  type_contract: string
   tags: []
 }
 
@@ -20,7 +23,7 @@ export default class JobController {
     const user_id = req.headers.userid
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const session = await db('candidate_profile')
@@ -45,7 +48,7 @@ export default class JobController {
     const { userid } = req.params
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
 
@@ -62,10 +65,10 @@ export default class JobController {
   async create(req: Request, res: Response) {
     const token = req.headers.authorization
     const user_id = req.headers.userid
-    const { title, job_description, tags }: JobData = req.body
+    const { title, job_description, number_offers, locale, type_contract, tags }: JobData = req.body
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const [id] = await db('job_offer').insert({
@@ -73,6 +76,9 @@ export default class JobController {
       user_id,
       title,
       job_description,
+      number_offers,
+      locale,
+      type_contract,
       tags
     })
 
@@ -86,7 +92,7 @@ export default class JobController {
     const token = req.headers.authorization
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const job = await db('job_offer')

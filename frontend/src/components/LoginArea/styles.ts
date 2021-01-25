@@ -26,7 +26,6 @@ const LoginContainer = styled.div<LoginContainerProps>`
     position: relative;
     z-index: 9999;
   }
-
   form {
     background: #fff;
     padding: 30px;

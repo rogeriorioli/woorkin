@@ -4,7 +4,7 @@ const CardContainer = styled.div`
   padding: 20px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 20px;
-  margin : 20px  0;
+  margin: 20px 0;
   ul {
     li {
       display: inline-block;

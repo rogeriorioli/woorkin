@@ -22,7 +22,7 @@ export default class CorporateController {
     const token = req.headers.authorization
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const corpProfile = await db('corp_data')
@@ -38,7 +38,7 @@ export default class CorporateController {
     const { userid } = req.params
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const logo_url = await db('logo_corp')
@@ -67,7 +67,7 @@ export default class CorporateController {
       adress_company }: CorpData = req.body
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     await db('recruiter')

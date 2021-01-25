@@ -24,7 +24,7 @@ export default class ProfileController {
 
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const candidateProfile = await db('candidate_profile')
@@ -40,7 +40,7 @@ export default class ProfileController {
     const { id } = req.params
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
 
@@ -80,7 +80,7 @@ export default class ProfileController {
     }: CandidateProfile = req.body
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     await db('candidate')
@@ -126,7 +126,7 @@ export default class ProfileController {
     } = req.body
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
     const user = await db('candidate_profile')
       .where('user_id', id)
@@ -141,6 +141,6 @@ export default class ProfileController {
       })
 
 
-    return res.json({ message: `user :  ${name}  edited susseful`, })
+    return res.json({ message: 'Pefil editado com sucesso', })
   }
 }

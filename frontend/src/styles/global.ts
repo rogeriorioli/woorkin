@@ -19,6 +19,14 @@ const GlobalStyles = createGlobalStyle`
       background : #333;
       border : none;
     }
+    @media screen and (max-width: 768px) {
+      .column-mobile {
+        min-width : 100%;
+      }
+    }
+    .main-content {
+      margin: 20px 0;
+    }
 `;
 
 export default GlobalStyles;

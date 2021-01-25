@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 interface PageHeaderProps {
   background?: string;
+  height?: string;
 }
 
 const PageHeaderContainer = styled.section<PageHeaderProps>`
   position: relative;
   top: -90px;
-  min-height: 600px;
+  min-height: ${(props) => props.height}px;
   display: flex;
   align-items: center;
   background: url(${(props) => props.background});

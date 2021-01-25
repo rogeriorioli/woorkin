@@ -4,13 +4,15 @@ import AvatarContainer from './styles';
 // import { Container } from './styles';
 
 interface AvatarProps {
-  background :string
+  background: string;
 }
 
-const Avatar = ({ background} : AvatarProps) => { 
+const Avatar = ({ background }: AvatarProps) => {
   return (
-    <AvatarContainer avatar={!background ?  '../static/images/avatar-icon.webp' : background} />
+    <AvatarContainer
+      avatar={!background ? '../static/images/avatar-icon.webp' : background}
+    />
   );
-}
+};
 
 export default Avatar;

@@ -3,14 +3,15 @@ import React from 'react';
 import PageHeaderContainer from './styles';
 
 interface PageTitle {
-  title: string;
-  description: string;
-  background: string;
+  title?: string;
+  description?: string;
+  background?: string;
+  height?: string;
 }
 
-const PageHeader = ({ background, description, title }: PageTitle) => {
+const PageHeader = ({ background, description, title, height }: PageTitle) => {
   return (
-    <PageHeaderContainer background={background}>
+    <PageHeaderContainer background={background} height={height}>
       <div className="container">
         <div className="row">
           <div className="column">

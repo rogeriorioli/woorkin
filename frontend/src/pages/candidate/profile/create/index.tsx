@@ -1,28 +1,27 @@
-import { profile } from 'console';
-import { useRouter } from 'next/router';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import Cards from '../../components/Cards';
-import Notifications from '../../components/Notifications';
-import UserAvatar from '../../components/UserAvatar';
-import Layouts from '../../Layouts';
-import PageHeader from '../../Layouts/PageHeader';
-import api from '../../services/api';
+import React, { useEffect, useState } from 'react';
 
-// import { Container } from './styles';
+import Notifications from '../../../../components/Notifications';
+import UserAvatar from '../../../../components/UserAvatar';
 
-const Profile = ({ id }) => {
-  const [profile, setProfile] = useState([]);
-  const [avatar, setAvatar] = useState({});
-  const router = useRouter();
- const [formProfile, setFormProfile] = useState({});
-   const [notification, setNotification] = useState({
+import Layouts from '../../../../Layouts';
+import PageHeader from '../../../../Layouts/PageHeader';
+import api from '../../../../services/api';
+
+const create: React.FC = () => {
+  const [formProfile, setFormProfile] = useState({});
+  const [notification, setNotification] = useState({
     message: '',
     background: 'red',
     then: false
   });
   const [userPermissions, setUserPermissions] = useState({});
 
-  const getFormData = (event : any) => {
+  useEffect(() => {
+    const { permissions } = sessionStorage;
+    setUserPermissions(JSON.parse(permissions));
+  }, []);
+  console.log(userPermissions);
+  const getFormData = (event) => {
     event.persist();
     setFormProfile((formProfile) => ({
       ...formProfile,
@@ -30,28 +29,10 @@ const Profile = ({ id }) => {
     }));
   };
 
-  useEffect(() => {
-    const { permissions = null } = { ...sessionStorage };
-    const credentials = JSON.parse(permissions);
-    setUserPermissions(credentials)
-    const headers = {
-      headers: { Authorization: `Bearer ${credentials.token}`, userid: id }
-    };
-    if (id !== credentials.user) {
-      router.push('/');
-    }
-    Promise.all([
-      api.get(`candidate/${id}`, headers),
-      api.get(`avatar_url/${id}`, headers)
-    ]).then((results) => {
-      setProfile(results[0].data);
-      setAvatar(results[1].data);
-    });
-  }, []);
-   const SaveProfile = async (event : any) => {
+  const SaveProfile = async (event) => {
     event.preventDefault();
     await api
-      .put(`candidateprofile/${id}`,  formProfile, {
+      .post('candidateprofile', formProfile, {
         headers: {
           Authorization: 'Bearer ' + userPermissions['token'],
           userid: userPermissions['user']
@@ -87,15 +68,18 @@ const Profile = ({ id }) => {
           });
         }, 2000);
       });
-  }; 
+  };
+
   return (
-    <Layouts>
-      <PageHeader
-        background="../static/images/profile-bg.jpeg"
-        title={`Olá! ${profile[0]?.name}`}
-        description="Essa é uma tela todinha sua "
-      />
-             <div className="container">
+    <>
+      <Layouts>
+        <PageHeader
+          height="400"
+          background="../../static/images/profile-bg.jpeg"
+          title="Seja bem Vindo Candidato"
+          description="complete seu perfil e começe hoje a procurar oportunidades incriveis "
+        />
+        <div className="container">
           <div className="row">
             <div className="column">
               <UserAvatar />
@@ -103,18 +87,15 @@ const Profile = ({ id }) => {
           </div>
           <div className="row">
             <div className="column">
-              <h3>Edite suas Informações</h3>
+              <h3>Complete suas Informações</h3>
             </div>
           </div>
-          {profile.map(userData => {
-            return (
-            <form key={userData.id}>
+          <form>
             <div className="row">
               <div className="column">
                 <label>Nome Completo</label>
                 <input
                   name="name"
-                  defaultValue={userData.name}
                   onChange={getFormData}
                   type="text"
                   placeholder="Nome Sobrenome"
@@ -122,7 +103,7 @@ const Profile = ({ id }) => {
               </div>
               <div className="column">
                 <label>Data de Nascimento</label>
-                <input type="date" name="born_date" defaultValue={userData.born_date.toString().substr(0, 10)} onChange={getFormData} />
+                <input type="date" name="born_date" onChange={getFormData} />
               </div>
             </div>
             <div className="row">
@@ -131,7 +112,6 @@ const Profile = ({ id }) => {
                 <input
                   type="tel"
                   name="phone"
-                  defaultValue={userData.phone}
                   placeholder="11-99999-9999"
                   onChange={getFormData}
                   pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}"
@@ -142,7 +122,6 @@ const Profile = ({ id }) => {
                 <input
                   type="url"
                   name="website"
-                  defaultValue={userData.website}
                   onChange={getFormData}
                   pattern="https://.*"
                   placeholder="https://wwww.exemplo.com"
@@ -155,7 +134,6 @@ const Profile = ({ id }) => {
                 <input
                   type="url"
                   name="linkedin"
-                  defaultValue={userData.linkedin}
                   onChange={getFormData}
                   pattern="https://.*"
                   placeholder="https://www.linkedin.com/in/seu-linkedin/"
@@ -166,7 +144,6 @@ const Profile = ({ id }) => {
                 <input
                   type="url"
                   name="github"
-                  defaultValue={userData.github}
                   pattern="https://.*"
                   onChange={getFormData}
                   placeholder="https://github.com/seu-user"
@@ -178,7 +155,6 @@ const Profile = ({ id }) => {
                 <label>Uma pequena Introdução</label>
                 <textarea
                   name="description"
-                  defaultValue={userData.description}
                   placeholder="Sou Dev e gosto de ... "
                   onChange={getFormData}
                   maxLength={400}
@@ -197,22 +173,16 @@ const Profile = ({ id }) => {
               </div>
             </div>
           </form>
-            )
-          })}
-     
         </div>
-          {notification.then && (
+      </Layouts>
+      {notification.then && (
         <Notifications
           message={notification.message}
           background={notification.background}
         />
       )}
-    </Layouts>
+    </>
   );
 };
 
-export default Profile;
-
-Profile.getInitialProps = ({ query: { id } }) => {
-  return { id };
-};
+export default create;

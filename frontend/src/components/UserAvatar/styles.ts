@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface AvatarImage {
   background?: string;
-  avatar?: string
+  avatar?: string;
 }
 
 const AvatarContainer = styled.div<AvatarImage>`
@@ -16,11 +16,11 @@ const AvatarContainer = styled.div<AvatarImage>`
   right: 0;
   top: -200px;
   box-shadow: 0px 0px 4px 0px #333;
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
-    background: url(${(props) => props.avatar}) no-repeat;
-      background-size: cover;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  background: url(${(props) => props.avatar}) no-repeat;
+  background-size: cover;
   .btn-picture {
     position: relative;
     overflow: hidden;

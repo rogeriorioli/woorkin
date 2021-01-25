@@ -19,13 +19,8 @@ export default class ResumeController {
     const { userid } = req.params
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
-
-    const user_avatar = await db('user_avatar')
-      .where('user_id', userid)
-      .select('avatar_url')
-      .first()
 
     const candidateResume = await db('candidate_resume')
       .where('user_id', userid)
@@ -33,7 +28,7 @@ export default class ResumeController {
       .orderBy('created_at', 'desc')
       .first()
 
-    return res.json([candidateResume, user_avatar])
+    return res.json(candidateResume)
   }
 
 
@@ -43,7 +38,7 @@ export default class ResumeController {
     const { title, resume, skills }: ResumeData = req.body
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const [id] = await db('candidate_resume').insert({

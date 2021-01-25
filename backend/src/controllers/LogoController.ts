@@ -12,7 +12,7 @@ export default class LogoController {
     const { userid } = req.params
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const image = await db('logo_corp')
@@ -31,7 +31,7 @@ export default class LogoController {
 
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const [id] = await db('logo_corp').insert({

@@ -13,7 +13,7 @@ export default class ImageController {
     const { userid } = req.params
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const image = await db('user_avatar')
@@ -35,7 +35,7 @@ export default class ImageController {
 
 
     if (!user_id) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const user = await db('candidate')
@@ -46,7 +46,7 @@ export default class ImageController {
 
 
     if (!token) {
-      return res.status(400).json({ err: 'not permited ' })
+      return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const [userId] = await db('user_avatar').insert({
