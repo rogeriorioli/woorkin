@@ -90,111 +90,111 @@ const Profile = ({ id }) => {
       });
   };
   return (
-      <UserArea id={id} name={profile[0]?.name}>
-        <div className="row">
-          <div className="column">
-            <h2>Edite seu Perfil</h2>
-            <hr/>
-          </div>
+    <UserArea id={id} name={profile[0]?.name}>
+      <div className="row">
+        <div className="column">
+          <h2>Edite seu Perfil</h2>
+          <hr />
         </div>
-        {profile.map((userData) => {
-          return (
-            <form key={userData.id}>
-              <div className="row">
-                <div className="column">
-                  <label>Nome Completo</label>
-                  <input
-                    name="name"
-                    defaultValue={userData.name}
-                    onChange={getFormData}
-                    type="text"
-                    placeholder="Nome Sobrenome"
-                  />
-                </div>
-                <div className="column">
-                  <label>Data de Nascimento</label>
-                  <input
-                    type="date"
-                    name="born_date"
-                    defaultValue={userData.born_date.toString().substr(0, 10)}
-                    onChange={getFormData}
-                  />
-                </div>
+      </div>
+      {profile.map((userData) => {
+        return (
+          <form key={userData.id}>
+            <div className="row">
+              <div className="column">
+                <label>Nome Completo</label>
+                <input
+                  name="name"
+                  defaultValue={userData.name}
+                  onChange={getFormData}
+                  type="text"
+                  placeholder="Nome Sobrenome"
+                />
               </div>
-              <div className="row">
-                <div className="column">
-                  <label>Telefone</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    defaultValue={userData.phone}
-                    placeholder="11-99999-9999"
-                    onChange={getFormData}
-                    pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}"
-                  />
-                </div>
-                <div className="column">
-                  <label>Portifolio</label>
-                  <input
-                    type="url"
-                    name="website"
-                    defaultValue={userData.website}
-                    onChange={getFormData}
-                    pattern="https://.*"
-                    placeholder="https://wwww.exemplo.com"
-                  />
-                </div>
+              <div className="column">
+                <label>Data de Nascimento</label>
+                <input
+                  type="date"
+                  name="born_date"
+                  defaultValue={userData.born_date.toString().substr(0, 10)}
+                  onChange={getFormData}
+                />
               </div>
-              <div className="row">
-                <div className="column">
-                  <label>Linked In</label>
-                  <input
-                    type="url"
-                    name="linkedin"
-                    defaultValue={userData.linkedin}
-                    onChange={getFormData}
-                    pattern="https://.*"
-                    placeholder="https://www.linkedin.com/in/seu-linkedin/"
-                  />
-                </div>
-                <div className="column">
-                  <label>Github</label>
-                  <input
-                    type="url"
-                    name="github"
-                    defaultValue={userData.github}
-                    pattern="https://.*"
-                    onChange={getFormData}
-                    placeholder="https://github.com/seu-user"
-                  />
-                </div>
+            </div>
+            <div className="row">
+              <div className="column">
+                <label>Telefone</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  defaultValue={userData.phone}
+                  placeholder="11-99999-9999"
+                  onChange={getFormData}
+                  pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}"
+                />
               </div>
-              <div className="row">
-                <div className="column">
-                  <label>Uma pequena Introdução</label>
-                  <textarea
-                    name="description"
-                    defaultValue={userData.description}
-                    placeholder="Sou Dev e gosto de ... "
-                    onChange={getFormData}
-                    maxLength={400}
-                  ></textarea>
-                </div>
+              <div className="column">
+                <label>Portifolio</label>
+                <input
+                  type="url"
+                  name="website"
+                  defaultValue={userData.website}
+                  onChange={getFormData}
+                  pattern="https://.*"
+                  placeholder="https://wwww.exemplo.com"
+                />
               </div>
-              <div className="row">
-                <div className="column">
-                  <button
-                    type="submit"
-                    className="button float-right"
-                    onClick={SaveProfile}
-                  >
-                    Salvar
-                  </button>
-                </div>
+            </div>
+            <div className="row">
+              <div className="column">
+                <label>Linked In</label>
+                <input
+                  type="url"
+                  name="linkedin"
+                  defaultValue={userData.linkedin}
+                  onChange={getFormData}
+                  pattern="https://.*"
+                  placeholder="https://www.linkedin.com/in/seu-linkedin/"
+                />
               </div>
-            </form>
-          );
-        })}
+              <div className="column">
+                <label>Github</label>
+                <input
+                  type="url"
+                  name="github"
+                  defaultValue={userData.github}
+                  pattern="https://.*"
+                  onChange={getFormData}
+                  placeholder="https://github.com/seu-user"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="column">
+                <label>Uma pequena Introdução</label>
+                <textarea
+                  name="description"
+                  defaultValue={userData.description}
+                  placeholder="Sou Dev e gosto de ... "
+                  onChange={getFormData}
+                  maxLength={400}
+                ></textarea>
+              </div>
+            </div>
+            <div className="row">
+              <div className="column">
+                <button
+                  type="submit"
+                  className="button float-right"
+                  onClick={SaveProfile}
+                >
+                  Salvar
+                </button>
+              </div>
+            </div>
+          </form>
+        );
+      })}
       {notification.then && (
         <Notifications
           message={notification.message}

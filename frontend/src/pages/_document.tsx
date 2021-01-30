@@ -40,6 +40,10 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script
+            type="text/javascript"
+            src="https://platform.linkedin.com/in.js"
+          />
         </body>
       </Html>
     );

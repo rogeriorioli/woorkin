@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
 interface HeightMobile {
-  height?: number;
+  height?: string;
 }
 
 export const MenuContainer = styled.div<HeightMobile>`
   border: 1px solid rgba(0, 0, 0, 0.12);
   margin: 20px 0;
-  height : ${props => !props.height ? '291px' : props.height + 'px'};
+  height: ${(props) => (!props.height ? '291px' : props.height + 'px')};
   overflow: hidden;
   position: relative;
-  transition : all 0.5s;
+  transition: all 0.5s;
   @media screen and (max-width: 768px) {
-    margin :  20px 0 0 0;
+    margin: 20px 0 0 0;
   }
   .welcome {
     padding: 10px;
@@ -38,16 +38,15 @@ export const MenuContainer = styled.div<HeightMobile>`
       }
     }
   }
-
 `;
 
 export const OpenMenu = styled.div`
-    display : none;
-    @media screen and (max-width: 768px) {
-     margin: 0 0 20px;
+  display: none;
+  @media screen and (max-width: 768px) {
+    margin: 0 0 20px;
 
     float: right;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     padding: 5px 0;
     text-align: center;
     height: 30px;
@@ -55,6 +54,4 @@ export const OpenMenu = styled.div`
     color: #666;
     display: block;
   }
-
-
-`
+`;

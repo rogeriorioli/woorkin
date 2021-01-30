@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import UserArea from '../../Layouts/UserArea'
+import UserArea from '../../Layouts/UserArea';
 import api from '../../services/api';
 
-
-const User = ({id}) => {
-    const [profile, setProfile] = useState([]);
+const User = ({ id }) => {
+  const [profile, setProfile] = useState([]);
 
   const router = useRouter();
   useEffect(() => {
@@ -21,20 +20,19 @@ const User = ({id}) => {
     });
   }, [id]);
   return (
-    <UserArea id={id} name={profile[0]?.name}>
-          <div className="row">
-          <div className="column">
-            <h2>Dashboard</h2>
-            <hr/>
-          </div>
+    <UserArea id={id} name={profile && profile[0]?.name}>
+      <div className="row">
+        <div className="column">
+          <h2>Dashboard</h2>
+          <hr />
         </div>
+      </div>
     </UserArea>
   );
-}
+};
 
 export default User;
 
-
-User.getInitialProps = ({ query : {id} }) => {
-  return {id}
-}
+User.getInitialProps = ({ query: { id } }) => {
+  return { id };
+};

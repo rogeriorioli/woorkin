@@ -37,10 +37,10 @@ const DevLogin: React.FC = () => {
             if (data[0] === null) {
               setMessage('por favor complete seu perfil para poder ver vagas ');
               setTimeout(() => {
-                router.push('candidate/profile/create');
+                router.push(`/user/profile/create/${permissions.user}`);
               }, 3000);
             } else {
-              router.push(`/candidate/dashboard/${permissions.user}`);
+              router.push(`/`);
             }
           });
       })

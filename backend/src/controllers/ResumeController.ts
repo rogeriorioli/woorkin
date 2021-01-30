@@ -16,14 +16,14 @@ export default class ResumeController {
   async indexByUser(req: Request, res: Response) {
 
     const token = req.headers.authorization
-    const { userid } = req.params
+    const { id } = req.params
 
     if (!token) {
       return res.status(400).json({ err: 'Não Permitido ' })
     }
 
     const candidateResume = await db('candidate_resume')
-      .where('user_id', userid)
+      .where('user_id', id)
       .select('*')
       .orderBy('created_at', 'desc')
       .first()
