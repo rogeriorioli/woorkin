@@ -51,16 +51,15 @@ const Resume = ({ id }) => {
 <div class="right"></div>
 `;
 
-
   const [skills, setSkills] = useState([]);
   const [title, setTitle] = useState({});
-  const [resume, setResume] = useState('')
-  const [Userpermissions, setUserPermissions]= useState({})
+  const [resume, setResume] = useState('');
+  const [Userpermissions, setUserPermissions] = useState({});
   useEffect(() => {
     const { permissions = null } = { ...sessionStorage };
     const credentials = JSON.parse(permissions);
     setUserPermissions(credentials);
-  }, [])
+  }, []);
 
   const getSkills = (e) => {
     e.persist();
@@ -71,25 +70,26 @@ const Resume = ({ id }) => {
     setTitle({ [e.target.name]: e.target.value });
   };
 
-  const getResume  = (content) =>{
-      setResume(content)
-  }
+  const getResume = (content) => {
+    setResume(content);
+  };
   const dataForm = {
     title,
     skills: skills,
-    resume : resume
+    resume: resume
   };
   const sendResume = async (e) => {
-    e.preventDefault()
-    await api.post("resume", dataForm, {
-      headers : {
-        Authorization : `Bearer ${Userpermissions['token']}`,
-        userid : Userpermissions['user']
-      }
-    }).then(sucess => console.log(sucess) )
-      .catch(err => console.error(err));
-      
-  }
+    e.preventDefault();
+    await api
+      .post('resume', dataForm, {
+        headers: {
+          Authorization: `Bearer ${Userpermissions['token']}`,
+          userid: Userpermissions['user']
+        }
+      })
+      .then((sucess) => console.log(sucess))
+      .catch((err) => console.error(err));
+  };
   console.log(resume);
   return (
     <UserArea id={id}>

@@ -13,28 +13,30 @@ import api from '../../services/api';
 const Candidate = ({ id }) => {
   const [profile, setProfile] = useState([]);
   const [avatar, setAvatar] = useState({});
-  const [resume, setResume] = useState([])
+  const [resume, setResume] = useState([]);
 
   const router = useRouter();
   useEffect(() => {
     const { permissions = null } = { ...sessionStorage };
     const credentials = JSON.parse(permissions);
     const headers = {
-      headers: { Authorization: `Bearer ${credentials.token}` , userid : credentials.user }
+      headers: {
+        Authorization: `Bearer ${credentials.token}`,
+        userid: credentials.user
+      }
     };
     Promise.all([
       api.get(`candidate/${id}`, headers),
       api.get(`avatar_url/${id}`, headers),
       api.get(`resume/${id}`, headers)
-
     ]).then((results) => {
       setProfile(results[0].data);
       setAvatar(results[1].data);
-      setResume(results[2].data)
+      setResume(results[2].data);
     });
   }, []);
 
-  console.log(resume)
+  console.log(resume);
   return (
     <Layouts>
       <PageHeader
@@ -71,7 +73,7 @@ const Candidate = ({ id }) => {
         <div className="row">
           <div className="column">
             <h2>Curriculum</h2>
-            <div dangerouslySetInnerHTML={{__html : resume['resume']}}/>
+            <div dangerouslySetInnerHTML={{ __html: resume['resume'] }} />
           </div>
         </div>
       </div>
