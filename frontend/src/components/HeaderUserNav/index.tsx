@@ -49,21 +49,20 @@ const HeaderUserNav = () => {
           api.get(`avatar_url/${credentials.user}`, headers)
         ]).then((success) => {
           const candidate = success[0].data;
-          console.log(`candidatte` , candidate)
+          console.log(`candidatte`, candidate);
           const avatar = success[1].data;
           console.log(candidate);
-          !candidate[0] ?
-          setUser({
-            name: '',
-            image: ''
-          })
-          : 
-          setUser({
-            name: candidate[0].name,
-            image: !avatar[0]?.avatar_url
-              ? avatar.avatar_url
-              : avatar[0]?.avatar_url
-          })
+          !candidate[0]
+            ? setUser({
+                name: '',
+                image: ''
+              })
+            : setUser({
+                name: candidate[0].name,
+                image: !avatar[0]?.avatar_url
+                  ? avatar.avatar_url
+                  : avatar[0]?.avatar_url
+              });
         });
       }
       if (credentials.user_type === 'recruiter') {
