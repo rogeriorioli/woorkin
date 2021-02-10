@@ -49,14 +49,21 @@ const HeaderUserNav = () => {
           api.get(`avatar_url/${credentials.user}`, headers)
         ]).then((success) => {
           const candidate = success[0].data;
+          console.log(`candidatte` , candidate)
           const avatar = success[1].data;
           console.log(candidate);
+          !candidate[0] ?
+          setUser({
+            name: '',
+            image: ''
+          })
+          : 
           setUser({
             name: candidate[0].name,
             image: !avatar[0]?.avatar_url
               ? avatar.avatar_url
               : avatar[0]?.avatar_url
-          });
+          })
         });
       }
       if (credentials.user_type === 'recruiter') {
@@ -95,7 +102,7 @@ const HeaderUserNav = () => {
       {!user.image && !user.name ? (
         <nav>
           <div onClick={toogleMenu} className="float-right">
-            Login{' '}
+            Login
             {toggleMenu.open === false ? (
               <CgChevronDown size={22} />
             ) : (
@@ -104,14 +111,14 @@ const HeaderUserNav = () => {
           </div>
           <ul>
             <li>
-              <Link href="register/candidate">
+              <Link href="/register/candidate">
                 <a>
                   <RiUserStarLine size={22} /> Sou Candidato
                 </a>
               </Link>
             </li>
             <li>
-              <Link href="register/recruiter">
+              <Link href="/register/recruiter">
                 <a>
                   <RiUserSearchLine size={22} />
                   Sou Recrutador
