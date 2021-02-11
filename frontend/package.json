@@ -6,7 +6,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\""
+    "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\"",
+    "deploy": "next build && pm2 start ./node_modules/next/dist/bin/next-start"
+
   },
   "husky": {
     "hooks": {
