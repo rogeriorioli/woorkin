@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
-    "build": "tsc"
+    "build": "tsc",
+    "deploy" : "pm2 ./src/dist/server.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.9",
