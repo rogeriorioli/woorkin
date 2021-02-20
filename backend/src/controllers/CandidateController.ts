@@ -3,6 +3,10 @@ import { Request, Response } from 'express'
 import { v4 } from "uuid";
 
 import db from '../database/connection'
+import welcome from '../emailTemplates/welcome';
+
+
+import Mail from '../services/sendemail'
 interface LoginData {
     email: string,
     password: string,
@@ -20,6 +24,7 @@ export default class CandidateController {
             password,
             username
         }: LoginData = req.body
+        const message = welcome(req.body.username)
 
         const user = await db('candidate')
             .column('id')
@@ -37,10 +42,18 @@ export default class CandidateController {
                 user_type,
             })
 
+            Mail.to = email;
+            Mail.subject = 'Bem Vindo(as) a Woorkin';
+            Mail.message = message
+
+            let result = Mail.sendMail()
+
             return res.status(201).json({
                 message: "user successfully create",
                 id: id,
-                user_type
+                user_type,
+                result,
+
 
             })
         }

@@ -1,0 +1,41 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all padding="0px"></mj-all>
+      <mj-text font-family="Ubuntu, Helvetica, Arial, sans-serif" padding="0 25px" font-size="13px"></mj-text>
+      <mj-section background-color="#ffffff"></mj-section>
+      <mj-class name="preheader" color="#000000" font-size="11px"></mj-class>
+    </mj-attributes>
+    <mj-style inline="inline">a { text-decoration: none!important; color: inherit!important; }</mj-style>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column width="100%">
+        <mj-image src="https://devrec.s3.amazonaws.com/headeremail.png" href="https://woorkin.com.br" alt="header image" padding="0px"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="40px" padding-top="30px">
+      <mj-column>
+        <mj-text align="center" padding="10px 25px" font-size="20px" color="#489BDA"><strong>Olá ${ username } ! </strong></mj-text>
+        <mj-text align="center" font-size="18px" font-family="Arial">Seja muito bem vindo a plataforma woorkin,  espero que consigo atingir seus objetivos e conseguir fazer excelentes conexões</mj-text>
+  
+        <mj-button background-color="#489BDA" color="#FFFFFF" href="https://mjml.io" font-family="Arial, sans-serif" padding="20px 0 0 0" font-weight="bold" font-size="16px">Começe a usar agora mesmo</mj-button>
+    
+      </mj-column>
+
+    </mj-section>
+        <mj-section>
+      <mj-column width="100%">
+        <mj-image src="https://devrec.s3.amazonaws.com/footer-mail.png" alt="header image" padding="0px"></mj-image>
+      </mj-column>
+    </mj-section>
+      <mj-section>
+      <mj-column width="100%" padding="30px 0">
+   
+        <mj-image src="https://devrec.s3.amazonaws.com/logo.png" href="https://woorkin.com.br" width="150px" alt="header image" padding="0px"></mj-image>
+    
+      </mj-column>
+      </mj-section>
+    
+  </mj-body>
+</mjml>
