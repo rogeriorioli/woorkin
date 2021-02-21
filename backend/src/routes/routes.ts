@@ -12,6 +12,7 @@ import multerConfig = require('../config/multer.config')
 import AvatarController from '../controllers/AvatarController';
 import LogoController from '../controllers/LogoController';
 import RegisterController from '../controllers/RegisterController';
+import SkillController from '../controllers/SkillController';
 
 const authMiddleware = require('../middleware/Auth')
 
@@ -29,6 +30,8 @@ const avatarController = new AvatarController
 const logoController = new LogoController
 const registerController = new RegisterController
 
+const skillController = new SkillController
+
 //post
 routes.post('/recruiter', recruiterController.create);
 routes.post('/corpdata', authMiddleware, corporateController.create);
@@ -36,6 +39,7 @@ routes.post('/candidate', candidateController.create);
 routes.post('/candidateprofile', authMiddleware, profileController.create);
 routes.post('/job', authMiddleware, jobcontroller.create);
 routes.post('/resume', authMiddleware, resumeController.create);
+
 
 //update
 
@@ -46,6 +50,8 @@ routes.delete('/candidate/:id', authMiddleware, candidateController.delete);
 routes.delete('/job/:id', authMiddleware, jobcontroller.delete)
 
 //get 
+
+routes.get('/resume/skills', authMiddleware, skillController.index)
 routes.get('/jobs', authMiddleware, jobcontroller.index)
 routes.get('/jobs/:userid', authMiddleware, jobcontroller.indexByCorp)
 routes.get('/candidates', authMiddleware, profileController.index)
@@ -55,6 +61,7 @@ routes.get('/corporates/', authMiddleware, corporateController.index)
 routes.get('/corporate/:userid', authMiddleware, corporateController.indexByCorp)
 routes.get('/avatar_url/:userid', authMiddleware, avatarController.getImage)
 routes.get('/logo_url/:userid', authMiddleware, logoController.getImage)
+
 
 //put 
 
