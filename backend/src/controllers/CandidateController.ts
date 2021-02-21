@@ -45,14 +45,12 @@ export default class CandidateController {
             Mail.to = email;
             Mail.subject = 'Bem Vindo(as) a Woorkin';
             Mail.message = message
-
-            let result = Mail.sendMail()
+            Mail.sendMail()
 
             return res.status(201).json({
                 message: "user successfully create",
                 id: id,
-                user_type,
-                result,
+                user_type
 
 
             })

@@ -7,6 +7,7 @@ class Mail {
   constructor(
     public to?: string,
     public subject?: string,
+    public service?: string,
     public message?: string) { }
 
 
@@ -20,6 +21,8 @@ class Mail {
     };
 
     const transporter = nodemailer.createTransport({
+      //@ts-ignore
+      service: config.service,
       host: config.host,
       port: config.port,
       secure: false,

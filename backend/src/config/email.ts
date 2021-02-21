@@ -1,9 +1,10 @@
 
 class Configs {
-  public host = "smtp.mailtrap.io";
-  public port = 2525;
-  public user = "538d4eb5dbe1c1";
-  public password = "e8ccf03af9d333";
+  public service = "Gmail"
+  public host = `${process.env.host}`
+  public port = `${process.env.port}`
+  public user = `${process.env.user}`
+  public password = `${process.env.password}`
 }
 
 export default new Configs;
