@@ -1,3 +1,4 @@
+import { compare } from "bcryptjs";
 import { Response, Request } from "express"
 import jwt from 'jsonwebtoken'
 import db from '../database/connection'
@@ -14,13 +15,18 @@ export default class RecruiterLoginController {
 
         const user = await db('recruiter')
             .where('email', email)
-            .where('password', password)
             .select('email', 'password', 'user_type', 'id', 'first_session')
             .first()
 
-
         if (!user) {
-            return res.status(400).json({ err: 'user or password wrong' })
+            return res.json({ message: 'wrong email or password' })
+
+        }
+
+        const matchedPass = await compare(password, user.password)
+
+        if (!matchedPass) {
+            return res.json({ message: 'wrong email or password' })
         }
 
         if (user.first_session === null) {
@@ -28,9 +34,17 @@ export default class RecruiterLoginController {
         }
 
         user.password = undefined
+
         const token = jwt.sign({ email: user.email }, authConfig.secret, {
             expiresIn: 86400
         })
-        return res.json({ permissions: { token: token, user: user.id, user_type: user.user_type, first_session: user.first_session } })
+        return res.json({
+            permissions: {
+                token: token,
+                user: user.id,
+                user_type: user.user_type,
+                first_session: user.first_session
+            }
+        })
     }
 }

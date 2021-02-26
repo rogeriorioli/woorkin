@@ -1,3 +1,4 @@
+import { hash } from 'bcryptjs';
 import { Request, Response } from 'express'
 
 import { v4 } from "uuid";
@@ -26,6 +27,8 @@ export default class CandidateController {
         }: LoginData = req.body
         const message = welcome(req.body.username)
 
+        const hashedPassword = await hash(password, 8)
+
         const user = await db('candidate')
             .column('id')
             .where('email', email)
@@ -37,7 +40,7 @@ export default class CandidateController {
             await db('candidate').insert({
                 id,
                 email,
-                password,
+                password: hashedPassword,
                 username,
                 user_type,
             })
