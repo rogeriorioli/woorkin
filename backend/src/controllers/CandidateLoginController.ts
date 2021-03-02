@@ -3,7 +3,7 @@ import { Response, Request } from "express"
 import jwt from 'jsonwebtoken'
 import db from '../database/connection'
 
-const authConfig = require('../config/auth');
+import auth from '../config/auth'
 interface LoginData {
     username?: string
     email?: string,
@@ -20,14 +20,14 @@ export default class CandidateLoginController {
             .first()
 
         if (!user) {
-            return res.json({ message: 'wrong email or password' })
+            return res.status(400).json({ err: 'wrong email or password' })
 
         }
 
         const matchedPass = await compare(password, user.password)
 
         if (!matchedPass) {
-            return res.json({ message: 'wrong email or password' })
+            return res.status(400).json({ err: 'wrong email or password' })
         }
 
         if (user.first_session === null) {
@@ -36,8 +36,8 @@ export default class CandidateLoginController {
 
         user.password = undefined
 
-        const token = jwt.sign({ email: user.email }, authConfig.secret, {
-            expiresIn: 86400
+        const token = jwt.sign({ email: user.email }, auth.jwt.secret, {
+            expiresIn: auth.jwt.expiresIn
         })
         return res.json({
             permissions: {

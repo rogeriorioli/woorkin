@@ -51,7 +51,7 @@ export default class SkillController {
 
     }
 
-    return res.status(400).json({ err: "Compontecencia Já criada" })
+    return res.status(400).json({ err: "Competencia Já criada" })
 
 
   }

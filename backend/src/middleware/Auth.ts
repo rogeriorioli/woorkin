@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken'
 
-const authConfig = require('../config/auth')
+import authconfig from '../config/auth'
 
 module.exports = (req: Request, res: Response, next: any) => {
-  const authKey = authConfig.secretKey
+  const authKey = authconfig.jwt.secret
   const autHeader = req.headers.authorization;
   if (!autHeader)
     return res.status(401).send({ error: 'Unauthorized' });
@@ -21,7 +21,7 @@ module.exports = (req: Request, res: Response, next: any) => {
     return res.status(401).send({ error: 'token malformated' })
 
   // @ts-ignore
-  jwt.verify(token, authConfig.secret, (err, decode) => {
+  jwt.verify(token, authKey, (err, decode) => {
     if (err) return res.status(401).send({ error: 'token inalid' })
 
     // @ts-ignore

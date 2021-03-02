@@ -35,11 +35,14 @@ export default class ResumeController {
   async create(req: Request, res: Response) {
     const token = req.headers.authorization
     const user_id = req.headers.userid
-    const { title, resume, skills }: ResumeData = req.body
+    const { title, skills }: ResumeData = req.body
+    // @ts-ignore
+    const { originalname: name, size, key, location: resume = '' } = req.file
 
     if (!token) {
       return res.status(400).json({ err: 'Não Permitido ' })
     }
+
 
     const [id] = await db('candidate_resume').insert({
       id: v4(),

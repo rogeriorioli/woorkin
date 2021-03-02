@@ -13,6 +13,7 @@ import AvatarController from '../controllers/AvatarController';
 import LogoController from '../controllers/LogoController';
 import RegisterController from '../controllers/RegisterController';
 import SkillController from '../controllers/SkillController';
+import ResumeFileController from '../controllers/ResumeFileController';
 
 const authMiddleware = require('../middleware/Auth')
 
@@ -32,13 +33,16 @@ const registerController = new RegisterController
 
 const skillController = new SkillController
 
+const resumeFileController = new ResumeFileController
 //post
+
+
 routes.post('/recruiter', recruiterController.create);
 routes.post('/corpdata', authMiddleware, corporateController.create);
 routes.post('/candidate', candidateController.create);
 routes.post('/candidateprofile', authMiddleware, profileController.create);
 routes.post('/job', authMiddleware, jobcontroller.create);
-routes.post('/resume', authMiddleware, resumeController.create);
+
 
 
 //update
@@ -73,16 +77,19 @@ routes.put('/candidateprofile/:id', authMiddleware, profileController.update)
 routes.post('/authrecruiter', recruiterLoginController.authenticate)
 routes.post('/authcandidate', candidateLoginController.authenticate)
 
-const avatar = multer(multerConfig)
+const file = multer(multerConfig)
 
 //get counter registers
 
 routes.get('/counter', registerController.index)
 
 
-routes.post('/user_avatar', avatar.single('avatar_url'), authMiddleware, avatarController.create)
+routes.post('/user_avatar', file.single('avatar_url'), authMiddleware, avatarController.create)
 
-routes.post('/corp_logo', avatar.single('logo_url'), authMiddleware, logoController.create)
+
+routes.post('/user_resume', file.single('resume_url'), authMiddleware, resumeFileController.create)
+
+routes.post('/corp_logo', file.single('logo_url'), authMiddleware, logoController.create)
 
 
 export default routes
