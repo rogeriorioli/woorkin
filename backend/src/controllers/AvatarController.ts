@@ -1,3 +1,4 @@
+
 import { Request, Response } from 'express'
 
 
@@ -32,7 +33,6 @@ export default class ImageController {
 
     // @ts-ignore
     const { originalname: name, size, key, location: avatar_url = '' } = req.file
-
 
     if (!user_id) {
       return res.status(400).json({ err: 'Não Permitido ' })

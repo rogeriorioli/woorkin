@@ -42,6 +42,9 @@ routes.post('/corpdata', authMiddleware, corporateController.create);
 routes.post('/candidate', candidateController.create);
 routes.post('/candidateprofile', authMiddleware, profileController.create);
 routes.post('/job', authMiddleware, jobcontroller.create);
+routes.post('/resume', authMiddleware, resumeController.create);
+routes.post('/resume/skills', authMiddleware, skillController.create)
+
 
 
 
@@ -54,6 +57,7 @@ routes.delete('/candidate/:id', authMiddleware, candidateController.delete);
 routes.delete('/job/:id', authMiddleware, jobcontroller.delete)
 
 //get 
+
 
 routes.get('/resume/skills', authMiddleware, skillController.index)
 routes.get('/jobs', authMiddleware, jobcontroller.index)
@@ -82,7 +86,7 @@ const file = multer(multerConfig)
 //get counter registers
 
 routes.get('/counter', registerController.index)
-
+routes.get('/user_resume', authMiddleware, resumeFileController.index)
 
 routes.post('/user_avatar', file.single('avatar_url'), authMiddleware, avatarController.create)
 

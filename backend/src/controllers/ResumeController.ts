@@ -8,6 +8,7 @@ import db from '../database/connection'
 interface ResumeData {
   title: string
   resume: string,
+  description: string
   skills: []
 }
 
@@ -36,19 +37,40 @@ export default class ResumeController {
     const token = req.headers.authorization
     const user_id = req.headers.userid
     const { title, skills }: ResumeData = req.body
-    // @ts-ignore
-    const { originalname: name, size, key, location: resume = '' } = req.file
+
 
     if (!token) {
       return res.status(400).json({ err: 'Não Permitido ' })
     }
 
 
+    const candidate = await db('candidate_profile')
+      .where('user_id', user_id)
+      .select('user_id', 'description')
+      .first()
+
+
+
+    if (!candidate.description) {
+      return res.status(400).json({ err: ' complete seu perfil ' })
+    }
+
+
+    const resume = await db('candidate_resume')
+      .where('user_id', user_id)
+      .select('user_id')
+      .first()
+
+
+    if (resume) {
+      return res.status(400).json({ err: 'profile já preenchido' })
+    }
+
     const [id] = await db('candidate_resume').insert({
       id: v4(),
       user_id,
       title,
-      resume,
+      resume: candidate.description,
       skills
     })
 
