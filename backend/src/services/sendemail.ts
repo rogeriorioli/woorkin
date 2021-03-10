@@ -14,7 +14,7 @@ class Mail {
   sendMail() {
 
     let mailOptions = {
-      from: "rogerio@designhope.com.br",
+      from: "woorkin@woorkin.com.br",
       to: this.to,
       subject: this.subject,
       html: this.message
@@ -38,6 +38,7 @@ class Mail {
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
+        console.log(error)
         return error;
       } else {
         return "E-mail enviado com sucesso!";
